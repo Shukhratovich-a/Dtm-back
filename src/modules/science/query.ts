@@ -36,13 +36,6 @@ export default {
       s.create_at;
   `,
 
-  // GETFIRST: `
-  //   select
-  //     DISTINCT d.first_science_id
-  //   from
-  //     directions as d;
-  // `,
-
   POST: `
     insert into
       sciences (science_name)

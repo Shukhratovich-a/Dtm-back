@@ -3,7 +3,7 @@ import checkToken from "../../middlewares/checkToken.js";
 import validation from "../../middlewares/validation.js";
 import controller from "./controller.js";
 const router = Router();
-router.get("/regions", controller.GET);
+router.get("/regions", checkToken.user, controller.GET);
 router.post("/regions", checkToken.admin, validation, controller.POST);
 router.put("/regions/:regionId", checkToken.admin, validation, controller.PUT);
 router.delete("/regions/:regionId", checkToken.admin, controller.DELETE);

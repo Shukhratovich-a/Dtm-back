@@ -3,4 +3,5 @@ export default interface Directions {
   directionName?: string;
   firstScienceId?: number;
   secondScienceId?: number;
+  directionYear?: number;
 }

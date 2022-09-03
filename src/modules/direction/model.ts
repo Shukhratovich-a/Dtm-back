@@ -41,6 +41,9 @@ export default {
       let direction = await fetch(query.POST, directionName, firstScienceId, secondScienceId);
       if (!direction) return null;
 
+      const size = Object.keys(direction).length;
+      if (size == 0) return null;
+
       return direction;
     } catch (error) {
       console.log(error);

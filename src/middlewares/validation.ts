@@ -52,6 +52,16 @@ export default (req: Request, res: Response, next: NextFunction) => {
       if (error) throw error;
     }
 
+    // quota
+    if (req.url == "/quotas" && req.method == "POST") {
+      let { error } = schemas.quotaPostScheme.validate(req.body);
+      if (error) throw error;
+    }
+    if (req.url == "/quotas/" + req.params.quotaId && req.method == "PUT") {
+      let { error } = schemas.quotaPutScheme.validate(req.body);
+      if (error) throw error;
+    }
+
     return next();
   } catch (error: any) {
     return next(new ValidationError(400, error.message));

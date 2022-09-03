@@ -3,7 +3,7 @@ import checkToken from "../../middlewares/checkToken.js";
 import validation from "../../middlewares/validation.js";
 import controller from "./controller.js";
 const router = Router();
-router.get("/sciences", controller.GET);
+router.get("/sciences", checkToken.user, controller.GET);
 router.get("/sciences/first", checkToken.user, controller.GETFIRST);
 router.get("/sciences/second/:scienceId", checkToken.user, controller.GETSECOND);
 router.post("/sciences", checkToken.admin, validation, controller.POST);

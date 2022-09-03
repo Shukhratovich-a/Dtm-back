@@ -7,7 +7,7 @@ import controller from "./controller.js";
 
 const router: Router = Router();
 
-router.get(<string>"/sciences", controller.GET);
+router.get(<string>"/sciences", checkToken.user, controller.GET);
 router.get(<string>"/sciences/first", checkToken.user, controller.GETFIRST);
 router.get(<string>"/sciences/second/:scienceId", checkToken.user, controller.GETSECOND);
 

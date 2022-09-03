@@ -7,7 +7,7 @@ import controller from "./controller.js";
 
 const router: Router = Router();
 
-router.get(<string>"/regions", controller.GET);
+router.get(<string>"/regions", checkToken.user, controller.GET);
 
 router.post(<string>"/regions", checkToken.admin, validation, controller.POST);
 

@@ -1,6 +1,6 @@
 import { fetch } from "../../lib/postgres.js";
 
-import User from "../../types/user.js";
+import User from "../../types/user";
 
 import query from "./query.js";
 

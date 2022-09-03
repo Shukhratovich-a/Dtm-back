@@ -7,7 +7,7 @@ import controller from "./controller.js";
 
 const router: Router = Router();
 
-router.get(<string>"/directions", controller.GET);
+router.get(<string>"/directions", checkToken.user, controller.GET);
 
 router.post(<string>"/directions", checkToken.admin, validation, controller.POST);
 router.post(<string>"/directions/sciences", checkToken.user, controller.GETBYSCIENCES);

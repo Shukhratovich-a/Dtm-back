@@ -46,6 +46,9 @@ export default {
       let science = await fetch(query.POST, scienceName);
       if (!science) return null;
 
+      const size = Object.keys(science).length;
+      if (size == 0) return null;
+
       return science;
     } catch (error) {
       console.log(error);
@@ -57,6 +60,9 @@ export default {
     try {
       let science = await fetch(query.PUT, scienceName, scienceId);
       if (!science) return null;
+
+      const size = Object.keys(science).length;
+      if (size == 0) return null;
 
       return science;
     } catch (error) {
@@ -71,8 +77,7 @@ export default {
       if (!science) return null;
 
       const size = Object.keys(science).length;
-
-      if (!science || size == 0) return null;
+      if (size == 0) return null;
 
       return science;
     } catch (error) {

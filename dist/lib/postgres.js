@@ -44,13 +44,28 @@ const fetchAll = (SQL, ...params) => __awaiter(void 0, void 0, void 0, function*
             const obj = {};
             for (let key in object) {
                 obj[key.toLowerCase().replace(/(_\w)/g, (w) => w.toUpperCase().substr(1))] = object[key];
-                if (typeof object[key] == "object" && Object.keys(object[key]).length > 0) {
+                if (!object[key] ||
+                    (!Array.isArray(object[key]) &&
+                        typeof object[key] == "object" &&
+                        Object.keys(object[key]).length > 0)) {
                     const subObj = {};
                     for (let subKey in object[key]) {
                         subObj[subKey.toLowerCase().replace(/(_\w)/g, (w) => w.toUpperCase().substr(1))] =
                             object[key][subKey];
                     }
                     obj[key.toLowerCase().replace(/(_\w)/g, (w) => w.toUpperCase().substr(1))] = subObj;
+                }
+                else if (Array.isArray(object[key]) && object[key].length > 0) {
+                    const subArr = [];
+                    for (let subItem of object[key]) {
+                        const subObj = {};
+                        for (let subKey in subItem) {
+                            subObj[subKey.toLowerCase().replace(/(_\w)/g, (w) => w.toUpperCase().substr(1))] =
+                                subItem[subKey];
+                        }
+                        subArr.push(subObj);
+                    }
+                    obj[key.toLowerCase().replace(/(_\w)/g, (w) => w.toUpperCase().substr(1))] = subArr;
                 }
             }
             result.push(obj);

@@ -43,4 +43,21 @@ export default {
         firstScienceId: Joi.number().min(1),
         secondScienceId: Joi.number().min(1),
     }),
+    // direction
+    quotaPostScheme: Joi.object({
+        quotaContract: Joi.number().min(1).required(),
+        quotaGrand: Joi.number().min(1).required(),
+        quotaContractBal: Joi.number().min(1).max(189).required(),
+        quotaGrandBal: Joi.number().min(1).max(189).required(),
+        quotaYear: Joi.number().min(1).required(),
+        directionId: Joi.number().min(1).required(),
+    }),
+    quotaPutScheme: Joi.object({
+        quotaContract: Joi.number().min(1),
+        quotaGrand: Joi.number().min(1),
+        quotaContractBal: Joi.number().min(1).max(189),
+        quotaGrandBal: Joi.number().min(1).max(189),
+        quotaYear: Joi.number().min(1),
+        directionId: Joi.number().min(1),
+    }),
 };

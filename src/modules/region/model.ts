@@ -22,6 +22,9 @@ export default {
       let region = await fetch(query.POST, regionName);
       if (!region) return null;
 
+      const size = Object.keys(region).length;
+      if (size == 0) return null;
+
       return region;
     } catch (error) {
       console.log(error);
@@ -32,10 +35,10 @@ export default {
   PUT: async ({ regionName }: Region, { regionId }: Region): Promise<Region | null> => {
     try {
       let region = await fetch(query.PUT, regionName, regionId);
+      if (!region) return null;
 
       const size = Object.keys(region).length;
-
-      if (!region || size == 0) return null;
+      if (size == 0) return null;
 
       return region;
     } catch (error) {
@@ -47,10 +50,10 @@ export default {
   DELETE: async ({ regionId }: Region): Promise<Region | null> => {
     try {
       let region = await fetch(query.DELETE, regionId);
+      if (!region) return null;
 
       const size = Object.keys(region).length;
-
-      if (!region || size == 0) return null;
+      if (size == 0) return null;
 
       return region;
     } catch (error) {

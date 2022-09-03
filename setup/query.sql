@@ -1,9 +1,11 @@
-select
-  u.admin_id,
-  u.admin_name,
-  u.create_at
-from
-  admins as a
-where
-  lower(u.admin_name) = lower($1)
-  and u.admin_password = crypt($2, u.admin_password);
+insert into
+  quotas(
+    quota_contract,
+    quota_grand,
+    quota_contract_bal,
+    quota_grand_bal,
+    quota_year,
+    direction_id
+  )
+values
+  ($1, $2, $3, $4, $5, $6);

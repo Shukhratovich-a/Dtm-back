@@ -64,10 +64,12 @@ create table test_variants(
   test_variant_body varchar(1024) not null,
   test_variant_istrue boolean not null,
   test_id int references tests(test_id) not null,
-  unique (test_id, test_variant_istrue),
   create_at timestamp default current_timestamp
 );
-
+create unique index on test_variants (test_variant_istrue, test_id)
+where
+  test_variant_istrue;
+  
 -- Universities
 drop table if exists universities;
 create table universities(
@@ -93,8 +95,9 @@ create table quotas(
   quota_id serial primary key not null,
   quota_contract int not null,
   quota_grand int,
-  quota_contract_bal int not null,
-  quota_grand_bal int check (quota_contract_bal < quota_grand_bal),
+  quota_contract_bal decimal(4, 1) not null,
+  quota_grand_bal decimal(4, 1) check (quota_contract_bal < quota_grand_bal),
   direction_id int references directions(direction_id) not null,
+  quota_year int unique not null,
   create_at timestamp default current_timestamp
 );
