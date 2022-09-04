@@ -42,6 +42,16 @@ export default (req: Request, res: Response, next: NextFunction) => {
       if (error) throw error;
     }
 
+    // test
+    if (req.url == "/tests" && req.method == "POST") {
+      let { error } = schemas.testPostScheme.validate(req.body);
+      if (error) throw error;
+    }
+    if (req.url == "/tests/" + req.params.testId && req.method == "PUT") {
+      let { error } = schemas.testPutScheme.validate(req.body);
+      if (error) throw error;
+    }
+
     // direction
     if (req.url == "/directions" && req.method == "POST") {
       let { error } = schemas.directionPostScheme.validate(req.body);

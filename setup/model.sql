@@ -52,7 +52,8 @@ create table sciences(
 drop table if exists tests;
 create table tests(
   test_id serial primary key not null,
-  test_heading varchar(1024) not null,
+  test_heading varchar(512) not null,
+  test_description varchar(256),
   science_id int references sciences(science_id),
   create_at timestamp default current_timestamp
 );
@@ -66,6 +67,8 @@ create table test_variants(
   test_id int references tests(test_id) not null,
   create_at timestamp default current_timestamp
 );
+
+-- Index
 create unique index on test_variants (test_variant_istrue, test_id)
 where
   test_variant_istrue;

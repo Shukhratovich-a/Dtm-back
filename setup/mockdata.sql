@@ -41,18 +41,21 @@ values
     'male'
   );
 insert into
-  tests(test_heading, science_id)
+  tests(test_heading, test_description, science_id)
 values
   (
     '246*013579 soni 9 ga bo''linishi uchun yulduzchaning o''rniga qanday raqam qo''yilishi kerak?',
+    null,
     1
   ),
   (
-    'Quyidagi sonlardan qaysilari 18 ga qoldiqsiz bo''linadi?\nx=10842, y = 5,49⋅10^{4}, z=306198',
+    'Quyidagi sonlardan qaysilari 18 ga qoldiqsiz bo''linadi?',
+    'x=10842, y = 5,49⋅10^{4}, z=306198',
     1
   ),
   (
     'n raqamining qanday qiymatlarida 6134n soni 3 ga qoldiqsiz bo''linadi?',
+    null,
     1
   );
 insert into
@@ -74,7 +77,6 @@ values
   ('4; 2', false, 3),
   ('2', false, 3),
   ('4', false, 3);
-
 insert into
   quotas(
     quota_contract,

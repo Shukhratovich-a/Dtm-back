@@ -73,8 +73,8 @@ export default {
       let science: Science | null = await model.PUT(req.body, req.params);
       if (!science) return next(new RequestError(400, "bad request"));
 
-      res.status(201).json({
-        status: 201,
+      res.status(202).json({
+        status: 202,
         message: "science edited",
         data: science,
       } as Response);
@@ -88,8 +88,8 @@ export default {
       let science: Science | null = await model.DELETE(req.params);
       if (!science) return next(new RequestError(400, "bad request"));
 
-      res.status(201).json({
-        status: 201,
+      res.status(202).json({
+        status: 202,
         message: "science deleted",
         data: science,
       } as Response);

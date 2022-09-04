@@ -37,6 +37,18 @@ export default {
     scienceName: Joi.string().min(3).max(64).required(),
   }),
 
+  // test
+  testPostScheme: Joi.object({
+    testHeading: Joi.string().min(1).max(512).required(),
+    testDescription: Joi.string().min(1).max(256),
+    scienceId: Joi.number().min(1).required(),
+  }),
+  testPutScheme: Joi.object({
+    testHeading: Joi.string().min(1).max(512),
+    testDescription: Joi.string().min(1).max(256),
+    scienceId: Joi.number().min(1),
+  }),
+
   // direction
   directionPostScheme: Joi.object({
     directionName: Joi.string().min(3).max(256).required(),

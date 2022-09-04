@@ -14,7 +14,7 @@ const fetch = async (SQL: string, ...params: any) => {
     for (let key in row) {
       result[key.toLowerCase().replace(/(_\w)/g, (w) => w.toUpperCase().substr(1))] = row[key];
 
-      if (typeof row[key] == "object" && Object.keys(row[key]).length > 0) {
+      if (row[key] && typeof row[key] == "object" && Object.keys(row[key]).length > 0) {
         const subObj = {} as any;
 
         for (let subKey in row[key]) {
@@ -47,10 +47,10 @@ const fetchAll = async (SQL: string, ...params: any) => {
         obj[key.toLowerCase().replace(/(_\w)/g, (w) => w.toUpperCase().substr(1))] = object[key];
 
         if (
-          !object[key] ||
-          (!Array.isArray(object[key]) &&
-            typeof object[key] == "object" &&
-            Object.keys(object[key]).length > 0)
+          object[key] &&
+          !Array.isArray(object[key]) &&
+          typeof object[key] == "object" &&
+          Object.keys(object[key]).length > 0
         ) {
           const subObj = {} as any;
 

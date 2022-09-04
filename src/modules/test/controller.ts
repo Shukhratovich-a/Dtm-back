@@ -28,8 +28,8 @@ export default {
       let tests: Test | null = await model.POST(req.body);
       if (!tests) return next(new NotFoundError(404, "no data"));
 
-      res.status(200).json({
-        status: 200,
+      res.status(201).json({
+        status: 201,
         message: "test added",
         data: tests,
       } as Response);
@@ -43,8 +43,8 @@ export default {
       let tests: Test | null = await model.PUT(req.body, req.params);
       if (!tests) return next(new NotFoundError(404, "no data"));
 
-      res.status(200).json({
-        status: 200,
+      res.status(202).json({
+        status: 202,
         message: "test edited",
         data: tests,
       } as Response);
@@ -58,9 +58,9 @@ export default {
       let tests: Test | null = await model.DELETE(req.params);
       if (!tests) return next(new NotFoundError(404, "no data"));
 
-      res.status(200).json({
-        status: 200,
-        message: "test edited",
+      res.status(202).json({
+        status: 202,
+        message: "test deleted",
         data: tests,
       } as Response);
     } catch (error: any) {

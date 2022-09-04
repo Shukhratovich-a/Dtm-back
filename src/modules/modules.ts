@@ -5,7 +5,8 @@ import users from "./user/router.js";
 import regions from "./region/router.js";
 import sciences from "./science/router.js";
 import tests from "./test/router.js";
+import variants from "./variant/router.js";
 import direction from "./direction/router.js";
 import quotas from "./quota/router.js";
 
-export default <Router[]>[admins, users, regions, sciences, tests, direction, quotas];
+export default <Router[]>[admins, users, regions, sciences, tests, variants, direction, quotas];

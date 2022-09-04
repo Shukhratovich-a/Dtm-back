@@ -3,6 +3,7 @@ export default {
     select
       t.test_id,
       t.test_heading,
+      t.test_description,
       t.create_at,
       to_json(s) as science,
       json_agg(v.*) as test_variants
@@ -30,8 +31,8 @@ export default {
     update
       tests
     set
-      test_heading = $1,
-      science_id = $2
+      test_heading = coalesce($1, test_heading),
+      science_id = coalesce($2, science_id)
     where
       test_id = $3
     returning *;

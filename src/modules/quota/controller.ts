@@ -28,8 +28,8 @@ export default {
       let quota: Quota | null = await model.POST(req.body);
       if (!quota) return next(new NotFoundError(400, "bad request"));
 
-      res.status(200).json({
-        status: 200,
+      res.status(201).json({
+        status: 201,
         message: "quota added",
         data: quota,
       } as Response);
@@ -43,8 +43,8 @@ export default {
       let quota: Quota | null = await model.PUT(req.body, req.params);
       if (!quota) return next(new NotFoundError(400, "bad request"));
 
-      res.status(200).json({
-        status: 200,
+      res.status(202).json({
+        status: 202,
         message: "quota edited",
         data: quota,
       } as Response);
@@ -58,8 +58,8 @@ export default {
       let quota: Quota | null = await model.DELETE(req.params);
       if (!quota) return next(new NotFoundError(400, "bad request"));
 
-      res.status(200).json({
-        status: 200,
+      res.status(202).json({
+        status: 202,
         message: "quota deleted",
         data: quota,
       } as Response);
