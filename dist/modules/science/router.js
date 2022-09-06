@@ -1,0 +1,12 @@
+import { Router } from "express";
+import checkToken from "../../middlewares/checkToken.js";
+import validation from "../../middlewares/validation.js";
+import controller from "./controller.js";
+const router = Router();
+router.get("/sciences", checkToken.user, controller.GET);
+router.get("/sciences/first", checkToken.user, controller.GETFIRST);
+router.get("/sciences/second/:scienceId", checkToken.user, controller.GETSECOND);
+router.post("/sciences", checkToken.admin, validation, controller.POST);
+router.put("/sciences/:scienceId", checkToken.admin, validation, controller.PUT);
+router.delete("/sciences/:scienceId", checkToken.admin, controller.DELETE);
+export default router;

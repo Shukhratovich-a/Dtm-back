@@ -52,6 +52,16 @@ export default (req: Request, res: Response, next: NextFunction) => {
       if (error) throw error;
     }
 
+    // variant
+    if (req.url == "/variants" && req.method == "POST") {
+      let { error } = schemas.variantPostScheme.validate(req.body);
+      if (error) throw error;
+    }
+    if (req.url == "/variants/" + req.params.variantId && req.method == "PUT") {
+      let { error } = schemas.variantPutScheme.validate(req.body);
+      if (error) throw error;
+    }
+
     // direction
     if (req.url == "/directions" && req.method == "POST") {
       let { error } = schemas.directionPostScheme.validate(req.body);
@@ -69,6 +79,12 @@ export default (req: Request, res: Response, next: NextFunction) => {
     }
     if (req.url == "/quotas/" + req.params.quotaId && req.method == "PUT") {
       let { error } = schemas.quotaPutScheme.validate(req.body);
+      if (error) throw error;
+    }
+
+    // exam
+    if (req.url == "/exams" && req.method == "POST") {
+      let { error } = schemas.examPostScheme.validate(req.body);
       if (error) throw error;
     }
 

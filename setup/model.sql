@@ -72,15 +72,15 @@ create table test_variants(
 create unique index on test_variants (test_variant_istrue, test_id)
 where
   test_variant_istrue;
-  
--- Universities
-drop table if exists universities;
-create table universities(
-  university_id serial primary key not null,
-  university_name varchar(64) not null,
-  region_id int references regions(region_id) not null,
-  create_at timestamp default current_timestamp
-);
+
+-- -- Universities
+-- drop table if exists universities;
+-- create table universities(
+--   university_id serial primary key not null,
+--   university_name varchar(64) not null,
+--   region_id int references regions(region_id) not null,
+--   create_at timestamp default current_timestamp
+-- );
 
 -- Directions
 drop table if exists directions;
@@ -89,6 +89,7 @@ create table directions(
   direction_name varchar(256) not null,
   first_science_id int references sciences(science_id),
   second_science_id int check (first_science_id != second_science_id) references sciences(science_id),
+  region_id int references regions(region_id) not null,
   create_at timestamp default current_timestamp
 );
 
@@ -101,6 +102,16 @@ create table quotas(
   quota_contract_bal decimal(4, 1) not null,
   quota_grand_bal decimal(4, 1) check (quota_contract_bal < quota_grand_bal),
   direction_id int references directions(direction_id) not null,
-  quota_year int unique not null,
+  create_at timestamp default current_timestamp
+);
+
+-- Exams
+drop table if exists exams;
+create table exams(
+  exam_id serial primary key not null,
+  user_id int references users (user_id) not null,
+  first_science_count int not null,
+  second_science_count int not null,
+  exam_time int not null,
   create_at timestamp default current_timestamp
 );

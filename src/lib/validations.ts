@@ -49,6 +49,23 @@ export default {
     scienceId: Joi.number().min(1),
   }),
 
+  // variant
+  variantPostScheme: Joi.object({
+    testId: Joi.number().min(1).required(),
+    variants: Joi.array()
+      .items(
+        Joi.object({
+          testVariantBody: Joi.string().min(1).max(1024).required(),
+          testVariantIstrue: Joi.boolean().required(),
+        })
+      )
+      .required(),
+  }),
+  variantPutScheme: Joi.object({
+    testVariantBody: Joi.string().min(1).max(1024),
+    testVariantIstrue: Joi.boolean(),
+  }),
+
   // direction
   directionPostScheme: Joi.object({
     directionName: Joi.string().min(3).max(256).required(),
@@ -77,5 +94,14 @@ export default {
     quotaGrandBal: Joi.number().min(1).max(189),
     quotaYear: Joi.number().min(1),
     directionId: Joi.number().min(1),
+  }),
+
+  // exam
+  examPostScheme: Joi.object({
+    userId: Joi.number().min(1).required(),
+    directionId: Joi.number().min(1).required(),
+    firstScienceCount: Joi.number().min(1).required(),
+    secondScienceCount: Joi.number().min(1).required(),
+    examTime: Joi.number().min(1).required(),
   }),
 };

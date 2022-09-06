@@ -1,5 +1,5 @@
 export default {
-  GET: `
+    GET: `
     select
       d.direction_id,
       d.direction_name,
@@ -7,39 +7,47 @@ export default {
       to_json(f) as first_science,
       to_json(s) as second_science,
       to_json(r) as science_region,
-      to_json(q) as direction_quota
+      to_json(q) as directio_quota
     from
       directions as d
       left join sciences as f on d.first_science_id = f.science_id
       left join sciences as s on d.second_science_id = s.science_id
-      left join regions as r on r.region_id = d.region_id
-      left join quotas as q on d.direction_id = q.direction_id
+      left join regions as r on r.region_id = d.regions_id
+      left join (
+        select
+          *
+        from
+          quotas
+        where
+          quota_year = (
+            select
+              max(quota_year)
+            from
+              quotas
+          )
+      ) as q on d.direction_id = q.direction_id
     order by
       d.create_at;
   `,
-
-  GETBYSCIENCES: `
+    GETBYSCIENCES: `
     select
       d.direction_id,
       d.direction_name,
       d.create_at,
       to_json(f) as first_science,
-      to_json(s) as second_science,
-      to_json(r) as science_region,
-      to_json(q) as direction_quota
+      to_json(s) as second_science
     from
       directions as d
-      left join sciences as f on d.first_science_id = f.science_id
-      left join sciences as s on d.second_science_id = s.science_id
-      left join regions as r on r.region_id = d.region_id
-      left join quotas as q on d.direction_id = q.direction_id
+    left join 
+      sciences as f on 
+      d.first_science_id = f.science_id
+    left join 
+      sciences as s on 
+      d.second_science_id = s.science_id
     where
-      d.first_science_id = $1 and d.second_science_id = $2
-    order by
-      d.create_at;
+      d.first_science_id = $1 and d.second_science_id = $2;
   `,
-
-  POST: `
+    POST: `
     insert into
       directions (direction_name, first_science_id, second_science_id)
     values
@@ -50,8 +58,7 @@ export default {
       )
     returning *;
   `,
-
-  PUT: `
+    PUT: `
     update
       directions
     set
@@ -62,8 +69,7 @@ export default {
       direction_id = $4
     returning *;
   `,
-
-  DELETE: `
+    DELETE: `
     delete from
       directions
     where
