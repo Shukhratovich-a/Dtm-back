@@ -5,9 +5,9 @@ import Exam from "../../types/exam";
 import query from "./query.js";
 
 export default {
-  GET: async ({ userId = 0 }: Exam): Promise<Exam[] | null> => {
+  GET: async ({ userId = 0, examId = 0 }: Exam): Promise<Exam[] | null> => {
     try {
-      let exams = await fetchAll(query.GET, userId);
+      let exams = await fetchAll(query.GET, userId, examId);
       if (!exams || exams.length == 0) return null;
 
       return exams;
@@ -17,21 +17,18 @@ export default {
     }
   },
 
-  POST: async ({
-    userId,
-    directionId,
-    firstScienceCount,
-    secondScienceCount,
-    examTime,
-  }: Exam): Promise<Exam | null> => {
+  POST: async (
+    { directionId, firstScienceCount, secondScienceCount, type }: Exam,
+    userId: number
+  ): Promise<Exam | null> => {
     try {
       let exam = await fetch(
         query.POST,
         userId,
-        directionId,
+        directionId! > 0 ? directionId : null,
         firstScienceCount,
         secondScienceCount,
-        examTime
+        type
       );
       if (!exam) return null;
 

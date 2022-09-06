@@ -49,6 +49,30 @@ export default {
             return null;
         }
     }),
+    PUTALL: ({ testId, variants, }) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const result = [];
+            yield fetch(query.DELETEALL, testId);
+            for (let variant of variants) {
+                const item = yield fetch(query.PUTALL, variant.testVariantBody, variant.testVariantIstrue, testId);
+                if (item) {
+                    const size = Object.keys(item).length;
+                    if (size == 0)
+                        return null;
+                    if (size > 0) {
+                        result.push(item);
+                    }
+                }
+            }
+            if (result.length == 0)
+                return null;
+            return result;
+        }
+        catch (error) {
+            console.log(error);
+            return null;
+        }
+    }),
     DELETE: ({ testVariantId }) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             let variant = yield fetch(query.DELETE, testVariantId);

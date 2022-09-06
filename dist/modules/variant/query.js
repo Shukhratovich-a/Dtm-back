@@ -16,6 +16,20 @@ export default {
       test_id = $3
     returning *;
   `,
+    PUTALL: `
+    insert into
+      test_variants (test_variant_body, test_variant_istrue, test_id)
+    values
+      ($1, $2, $3)
+    returning *;
+  `,
+    DELETEALL: `
+    delete from
+      test_variants
+    where
+      test_id = $1
+    returning *;
+  `,
     DELETE: `
     delete from
       test_variants

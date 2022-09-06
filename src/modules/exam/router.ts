@@ -8,7 +8,8 @@ import controller from "./controller.js";
 const router: Router = Router();
 
 router.get(<string>"/exams", checkToken.user, controller.GET);
-router.get(<string>"/exams/:userId", checkToken.user, controller.GET);
+router.get(<string>"/exams/:examId", checkToken.user, controller.GET);
+router.get(<string>"/exams/user/:userId", checkToken.user, controller.GET);
 
 router.post(<string>"/exams", checkToken.user, validation, controller.POST);
 

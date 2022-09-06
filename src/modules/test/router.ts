@@ -8,6 +8,7 @@ import controller from "./controller.js";
 const router: Router = Router();
 
 router.get(<string>"/tests", checkToken.user, controller.GET);
+router.get(<string>"/tests/science/:scienceId", checkToken.user, controller.GET);
 
 router.post(<string>"/tests", checkToken.admin, validation, controller.POST);
 

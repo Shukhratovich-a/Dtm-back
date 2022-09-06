@@ -10,7 +10,7 @@ import model from "./model.js";
 export default {
   GET: async (req: Req, res: Res, next: Next) => {
     try {
-      let tests: Test[] | null = await model.GET();
+      let tests: Test[] | null = await model.GET(req.params);
       if (!tests) return next(new NotFoundError(404, "no data"));
 
       res.status(200).json({

@@ -23,9 +23,9 @@ export default {
     }
   },
 
-  POST: async (req: Req, res: Res, next: Next) => {
+  POST: async (req: any, res: Res, next: Next) => {
     try {
-      let exam: Exam | null = await model.POST(req.body);
+      let exam: Exam | null = await model.POST(req.body, req.userId);
       if (!exam) return next(new NotFoundError(400, "bad request"));
 
       res.status(201).json({

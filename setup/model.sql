@@ -9,6 +9,7 @@ create extension pgcrypto;
 
 -- Types
 create type sex as enum ('male', 'female');
+create type type as enum ('grand', 'contract', 'not');
 
 -- Admins
 drop table if exists admins;
@@ -73,6 +74,7 @@ create unique index on test_variants (test_variant_istrue, test_id)
 where
   test_variant_istrue;
 
+
 -- -- Universities
 -- drop table if exists universities;
 -- create table universities(
@@ -112,6 +114,7 @@ create table exams(
   user_id int references users (user_id) not null,
   first_science_count int not null,
   second_science_count int not null,
-  exam_time int not null,
+  direction_id int references directions(direction_id),
+  type type not null,
   create_at timestamp default current_timestamp
 );

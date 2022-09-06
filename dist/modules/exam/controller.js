@@ -27,7 +27,7 @@ export default {
     }),
     POST: (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            let exam = yield model.POST(req.body);
+            let exam = yield model.POST(req.body, req.userId);
             if (!exam)
                 return next(new NotFoundError(400, "bad request"));
             res.status(201).json({

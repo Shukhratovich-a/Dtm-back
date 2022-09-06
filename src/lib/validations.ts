@@ -98,10 +98,9 @@ export default {
 
   // exam
   examPostScheme: Joi.object({
-    userId: Joi.number().min(1).required(),
-    directionId: Joi.number().min(1).required(),
-    firstScienceCount: Joi.number().min(1).required(),
-    secondScienceCount: Joi.number().min(1).required(),
-    examTime: Joi.number().min(1).required(),
+    directionId: Joi.number().min(0).required(),
+    firstScienceCount: Joi.number().min(0).required(),
+    secondScienceCount: Joi.number().min(0).required(),
+    type: Joi.string().valid("grand", "contract", "not").required(),
   }),
 };

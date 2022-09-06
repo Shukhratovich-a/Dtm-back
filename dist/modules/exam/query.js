@@ -4,7 +4,7 @@ export default {
       e.exam_id,
       e.first_science_count,
       e.second_science_count,
-      e.exam_time,
+      e.type,
       e.create_at,
       to_json(u) as user,
       to_json(d) as direction
@@ -38,6 +38,7 @@ export default {
     where
       case
         when $1 > 0 then e.user_id = $1
+        when $2 > 0 then e.exam_id = $2
         else true
       end
     order by
@@ -50,7 +51,7 @@ export default {
         direction_id,
         first_science_count,
         second_science_count,
-        exam_time
+        type
       )
     values
       ($1, $2, $3, $4, $5)

@@ -40,6 +40,21 @@ export default {
             return next(new InternalServerError(500, error.message));
         }
     }),
+    PUTALL: (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            let variants = yield model.PUTALL(req.body);
+            if (!variants)
+                return next(new NotFoundError(404, "bad request"));
+            res.status(201).json({
+                status: 201,
+                message: "variants added",
+                data: variants,
+            });
+        }
+        catch (error) {
+            return next(new InternalServerError(500, error.message));
+        }
+    }),
     DELETE: (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             let variant = yield model.DELETE(req.params);

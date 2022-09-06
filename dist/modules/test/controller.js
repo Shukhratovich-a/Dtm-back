@@ -12,7 +12,7 @@ import model from "./model.js";
 export default {
     GET: (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            let tests = yield model.GET();
+            let tests = yield model.GET(req.params);
             if (!tests)
                 return next(new NotFoundError(404, "no data"));
             res.status(200).json({

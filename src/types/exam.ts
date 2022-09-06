@@ -9,5 +9,5 @@ export default interface Exam {
   direction?: Directions;
   firstScienceCount?: number;
   secondScienceCount?: number;
-  examTime?: number;
+  type?: "grand" | "contract" | "not";
 }

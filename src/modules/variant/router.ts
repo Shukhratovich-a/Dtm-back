@@ -10,6 +10,7 @@ const router: Router = Router();
 router.post(<string>"/variants", checkToken.admin, validation, controller.POST);
 
 router.put(<string>"/variants/:testVariantId", checkToken.admin, validation, controller.PUT);
+router.put(<string>"/variants", checkToken.admin, validation, controller.PUTALL);
 
 router.delete(<string>"/variants/:testVariantId", checkToken.admin, controller.DELETE);
 

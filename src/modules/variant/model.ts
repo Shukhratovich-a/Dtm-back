@@ -62,6 +62,45 @@ export default {
     }
   },
 
+  PUTALL: async ({
+    testId,
+    variants,
+  }: {
+    testId: Variant;
+    variants: Variant[];
+  }): Promise<Variant[] | null> => {
+    try {
+      const result = [];
+
+      await fetch(query.DELETEALL, testId);
+
+      for (let variant of variants) {
+        const item = await fetch(
+          query.PUTALL,
+          variant.testVariantBody,
+          variant.testVariantIstrue,
+          testId
+        );
+
+        if (item) {
+          const size = Object.keys(item).length;
+          if (size == 0) return null;
+
+          if (size > 0) {
+            result.push(item);
+          }
+        }
+      }
+
+      if (result.length == 0) return null;
+
+      return result;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  },
+
   DELETE: async ({ testVariantId }: Variant): Promise<Variant | null> => {
     try {
       let variant = await fetch(query.DELETE, testVariantId);

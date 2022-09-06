@@ -15,6 +15,11 @@ export default {
     left join 
       test_variants as v on 
       t.test_id = v.test_id
+    where
+      case
+        when $1 > 0 then t.science_id = $1
+        else true
+      end
     group by
       s.science_id, t.test_id;
   `,

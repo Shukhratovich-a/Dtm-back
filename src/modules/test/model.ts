@@ -5,18 +5,20 @@ import Test from "../../types/test";
 import query from "./query.js";
 
 export default {
-  GET: async (): Promise<Test[] | null> => {
+  GET: async ({ scienceId = 0 }): Promise<Test[] | null> => {
     try {
-      let tests = await fetchAll(query.GET);
+      let tests = await fetchAll(query.GET, scienceId);
       if (!tests || tests.length == 0) return null;
 
       tests = tests.map((test) => {
-        test.testVariants = test.testVariants.map((variant: any) => {
-          delete variant.createAt;
-          delete variant.testId;
+        if (test.testVariants[0]) {
+          test.testVariants = test.testVariants.map((variant: any) => {
+            delete variant.createAt;
+            delete variant.testId;
 
-          return variant;
-        });
+            return variant;
+          });
+        }
 
         return test;
       });

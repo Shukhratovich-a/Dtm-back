@@ -10,17 +10,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { fetchAll, fetch } from "../../lib/postgres.js";
 import query from "./query.js";
 export default {
-    GET: () => __awaiter(void 0, void 0, void 0, function* () {
+    GET: ({ scienceId = 0 }) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            let tests = yield fetchAll(query.GET);
+            let tests = yield fetchAll(query.GET, scienceId);
             if (!tests || tests.length == 0)
                 return null;
             tests = tests.map((test) => {
-                test.testVariants = test.testVariants.map((variant) => {
-                    delete variant.createAt;
-                    delete variant.testId;
-                    return variant;
-                });
+                if (test.testVariants[0]) {
+                    test.testVariants = test.testVariants.map((variant) => {
+                        delete variant.createAt;
+                        delete variant.testId;
+                        return variant;
+                    });
+                }
                 return test;
             });
             return tests;
