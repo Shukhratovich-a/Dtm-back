@@ -41,6 +41,7 @@ export default {
       user_contact,
       user_name,
       region_id,
-      user_sex;
+      user_sex,
+      user_id;
   `,
 };
