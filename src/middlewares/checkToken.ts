@@ -15,7 +15,7 @@ const user = (req: Request | any, res: Response, next: NextFunction) => {
 
     let { userId } = jwt.verify(token) as any;
     req.userId = userId;
-    if (!userId) return next(new ForbiddenError(403, "bad token"));
+    // if (!userId) return next(new ForbiddenError(403, "bad token"));
 
     return next();
   } catch (error: any) {
@@ -35,7 +35,7 @@ const admin = (req: Request | any, res: Response, next: NextFunction) => {
 
     let { adminId } = jwt.verify(token) as any;
     req.adminId = adminId;
-    if (!adminId) return next(new ForbiddenError(403, "bad token"));
+    // if (!adminId) return next(new ForbiddenError(403, "bad token"));
 
     return next();
   } catch (error: any) {
